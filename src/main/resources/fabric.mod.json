@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "packetloggermapper",
+  "version": "${version}",
+
+  "name": "PacketLoggerMapper",
+  "description": "Remaps class names in fabric-packet-logger to mappings provided by StackDeobfuscator",
+
+  "authors": [
+    "booky10"
+  ],
+
+  "contact": {
+    "issues": "https://github.com/booky10/PacketLoggerMapper/issues",
+    "sources": "https://github.com/booky10/PacketLoggerMapper"
+  },
+
+  "icon": "assets/packetloggermapper/icon.png",
+  "license": "LGPL-3.0-only",
+  "environment": "client",
+
+  "mixins": [
+    "packetloggermapper.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.17",
+    "minecraft": ">=1.19.4",
+    "java": ">=17",
+
+    "stackdeobfuscator": ">=1.3.2",
+    "packetlogger": ">=1.4.0"
+  }
+}

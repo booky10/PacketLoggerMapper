@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.booky.packetloggermapper.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "PacketHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1,
+    "maxShiftBy": 5
+  }
+}
