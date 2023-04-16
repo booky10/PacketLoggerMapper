@@ -34,9 +34,11 @@ public class PacketHandlerMixin {
             remap = false
     )
     private static <T extends Packet<?>> void preObjectSend(T packet, CallbackInfo ci, BasePacketHandler<?> handler, BasePacketHandler<T> packetHandler, JsonObject jsonObject, ConnectionProtocol state, int packetId) {
-        String name = getPacketClassName(packet.getClass());
-        jsonObject.addProperty("name", name);
-        jsonObject.addProperty("legacyName", name);
+        String className = getPacketClassName(packet.getClass());
+        jsonObject.addProperty("name", RemappingUtil.remapClasses(className));
+        jsonObject.addProperty("legacyName", className
+                // looks better in the UI imo
+                + " ");
     }
 
     @Inject(
@@ -51,7 +53,8 @@ public class PacketHandlerMixin {
             remap = false
     )
     private static void prePacketNameAdd(CallbackInfoReturnable<ArrayList<JsonObject>> cir, ArrayList<JsonObject> ids, Iterator<Map.Entry<Class<? extends Packet<?>>, BasePacketHandler<?>>> var1, Map.Entry<Class<? extends Packet<?>>, BasePacketHandler<?>> entry, Class<? extends Packet<?>> packetClass, BasePacketHandler<?> handler, JsonObject jsonObject, String id) {
-        jsonObject.addProperty("label", getPacketClassName(packetClass));
+        String remappedClassName = RemappingUtil.remapClasses(getPacketClassName(packetClass));
+        jsonObject.addProperty("label", remappedClassName);
     }
 
     @Unique
@@ -62,6 +65,6 @@ public class PacketHandlerMixin {
             className.insert(0, '$');
             className.insert(0, clazz.getSimpleName());
         }
-        return RemappingUtil.remapClasses(className.toString());
+        return className.toString();
     }
 }
