@@ -60,10 +60,11 @@ public class PacketHandlerMixin {
     @Unique
     private static String getPacketClassName(Class<?> clazz) {
         StringBuilder className = new StringBuilder(clazz.getSimpleName());
-        while (clazz.getSuperclass() != Packet.class && clazz.getSuperclass() != Object.class && clazz.getSuperclass() != null) {
-            clazz = clazz.getSuperclass();
+        clazz = clazz.getSuperclass();
+        while (clazz != Packet.class && clazz != Object.class && clazz != Record.class && clazz != null) {
             className.insert(0, '$');
             className.insert(0, clazz.getSimpleName());
+            clazz = clazz.getSuperclass();
         }
         return className.toString();
     }
